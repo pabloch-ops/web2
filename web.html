@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para Giana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap">
+<style>
+:root{color-scheme:dark;--bg:#0d0b0e;--bg2:#1b1520;--gold:#d4af6a;--gold2:#f1dba6;--ink:#efe6d6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 20%,var(--bg2),var(--bg) 70%);color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif;display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}
+.script{font-family:"Great Vibes","Brush Script MT",cursive;color:var(--gold2)}
+#music{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:14px;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:8px 14px;font:inherit;font-size:15px;cursor:pointer;z-index:5}
+#music[aria-pressed="true"]{background:var(--gold);color:var(--bg)}
+#intro{text-align:center;transition:opacity .8s,transform .8s}
+#intro.gone{opacity:0;transform:translateY(30px);pointer-events:none;position:absolute}
+#intro h1{font-size:clamp(46px,12vw,72px);margin:0 0 6px;font-weight:400}
+#intro p{margin:0 0 34px;letter-spacing:.2em;text-transform:uppercase;font-size:14px;color:var(--gold)}
+.env{position:relative;width:min(300px,78vw);height:200px;margin:0 auto;cursor:pointer;filter:drop-shadow(0 18px 30px rgba(0,0,0,.6))}
+.env .back,.env .front{position:absolute;inset:0;border-radius:6px}
+.env .back{background:#2a2030;border:1px solid var(--gold)}
+.env .front{background:linear-gradient(135deg,#3a2c40,#241b2a);clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);border:1px solid var(--gold)}
+.flap{position:absolute;left:0;right:0;top:0;height:60%;background:linear-gradient(#4a3a52,#33283a);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .9s ease;border-top:1px solid var(--gold)}
+.env.open .flap{transform:rotateX(180deg)}
+.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-30%);width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f1dba6,#b8924a);color:#3a2a10;display:flex;align-items:center;justify-content:center;font-size:22px;z-index:3;transition:opacity .4s}
+.env.open .seal{opacity:0}
+.hint{margin-top:26px;font-style:italic;color:var(--gold);animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.4}}
+#letter{display:none;width:min(560px,100%);background:linear-gradient(160deg,#1f1824,#151018);border:1px solid var(--gold);border-radius:10px;padding:clamp(26px,6vw,48px);box-shadow:0 20px 50px rgba(0,0,0,.6);margin:40px 0}
+#letter.show{display:block}
+#letter h2{font-size:clamp(30px,8vw,42px);margin:0 0 22px;font-weight:400;text-align:center}
+#letter .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 0 24px}
+#letter p{font-size:clamp(18px,4.6vw,21px);line-height:1.65;margin:0 0 18px;opacity:0;transform:translateY(12px);transition:opacity 1s,transform 1s}
+#letter p.in{opacity:1;transform:none}
+#letter .sign{text-align:right;font-size:34px;margin-top:26px;color:var(--gold2)}
+</style>
+</head>
+<body>
+<button id="music" aria-pressed="false">♪ Música</button>
+
+<section id="intro">
+  <h1 class="script">Para Giana</h1>
+  <p>Un año juntos</p>
+  <div class="env" id="env" role="button" tabindex="0" aria-label="Abrir el sobre">
+    <div class="back"></div>
+    <div class="front"></div>
+    <div class="flap"></div>
+    <div class="seal">♥</div>
+  </div>
+  <div class="hint">Tocá el sobre para abrirlo</div>
+</section>
+
+<article id="letter">
+  <h2 class="script">Ábrela cuando quieras recordar nuestro primer año</h2>
+  <div class="rule"></div>
+  <p><em>Mi Giana:</em></p>
+  <p>Ayer cumplimos un año y todavía me acuerdo de nuestro primer beso. Duró muy poquito, y sin embargo lo siento como uno de los momentos más importantes de mi vida. Ese día no sabía que estaba empezando la historia más linda que me tocó vivir.</p>
+  <p>En este año me enamoré de muchas cosas tuyas, pero sobre todo de tu forma de ser. Me encanta cómo sos, cómo me hacés sentir y cómo hacés que hasta los días comunes se vuelvan especiales.</p>
+  <p>Quise que esto llegara después de nuestro día, para que la celebración no termine nunca. Gracias por este año, por cada risa y por cada momento a mi lado. Si pudiera volver atrás, elegiría de nuevo ese primer beso, y también todos los que vinieron después.</p>
+  <p>Feliz aniversario, mi amor. Esto es solo el primer capítulo.</p>
+  <p>Te quiero muchísimo.</p>
+  <p class="sign script">♥</p>
+</article>
+
+<script>
+(function(){
+  var env=document.getElementById('env'),intro=document.getElementById('intro'),letter=document.getElementById('letter'),btn=document.getElementById('music');
+  var ctx=null,timer=null,step=0,playing=false,master=null;
+  var mel=[523.25,659.25,783.99,659.25,587.33,698.46,880,698.46,523.25,659.25,783.99,1046.5,987.77,783.99,659.25,587.33];
+  var bass=[130.81,130.81,174.61,174.61,196,196,130.81,130.81];
+  function tone(f,t,d,type,v){
+    var o=ctx.createOscillator(),g=ctx.createGain();
+    o.type=type;o.frequency.value=f;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(v,t+0.05);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+d);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+d+0.05);
+  }
+  function tick(){
+    var t=ctx.currentTime+0.05;
+    tone(mel[step%mel.length],t,1.6,'sine',0.09);
+    if(step%2===0)tone(bass[(step/2)%bass.length],t,3.2,'triangle',0.07);
+    step++;
+  }
+  function startMusic(){
+    try{
+      if(!ctx){
+        ctx=new (window.AudioContext||window.webkitAudioContext)();
+        master=ctx.createGain();master.gain.value=0.9;
+        var d=ctx.createDelay(1);d.delayTime.value=0.38;
+        var fb=ctx.createGain();fb.gain.value=0.35;
+        master.connect(ctx.destination);master.connect(d);d.connect(fb);fb.connect(d);d.connect(ctx.destination);
+      }
+      if(ctx.state==='suspended')ctx.resume();
+      if(!timer){tick();timer=setInterval(tick,850);}
+      playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='♪ Música activada';
+    }catch(e){}
+  }
+  function stopMusic(){
+    if(timer){clearInterval(timer);timer=null;}
+    playing=false;btn.setAttribute('aria-pressed','false');btn.textContent='♪ Música';
+  }
+  btn.addEventListener('click',function(){playing?stopMusic():startMusic();});
+  function openEnv(){
+    if(env.classList.contains('open'))return;
+    env.classList.add('open');
+    if(!playing)startMusic();
+    setTimeout(function(){intro.classList.add('gone');},1100);
+    setTimeout(function(){
+      letter.classList.add('show');
+      var ps=letter.querySelectorAll('p');
+      for(var i=0;i<ps.length;i++){(function(p,n){setTimeout(function(){p.classList.add('in');},250+n*900);})(ps[i],i);}
+    },1700);
+  }
+  env.addEventListener('click',openEnv);
+  env.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnv();}});
+})();
+</script>
+</body>
+</html>
